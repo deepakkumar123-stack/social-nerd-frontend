@@ -1,11 +1,15 @@
 import { Route, Routes } from "react-router-dom";
-import Home from "./components/Layout/Home";
+import PreLoginLayoutRoute from "./@config/PreLoginLayout.routes";
+import PostLoginLayoutRoutes from "./@config/PostLoginLayout.routes";
 
 const App = () => {
   return (
     <>
       <Routes>
-        <Route element={<Home />} path="/" />
+        {PostLoginLayoutRoutes()}
+        <Route path="/" element={<PreLoginLayoutRoute />} />
+        {PreLoginLayoutRoute()}
+        <Route path="/" element={<PostLoginLayoutRoutes />} />
       </Routes>
     </>
   );
