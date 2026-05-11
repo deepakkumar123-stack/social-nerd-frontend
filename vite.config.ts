@@ -12,4 +12,7 @@ export default defineConfig({
       bundler: "vite",
     }),
   ],
+  optimizeDeps: {
+    include: ["@emoji-mart/react", "@emoji-mart/data"],
+  },
 });

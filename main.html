@@ -1,0 +1,3915 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SocialVerse | All-in-One Social App</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        /* Purple Color Palette */
+        --primary: #8a4fff;
+        --primary-light: #b794f6;
+        --primary-lighter: #e2d6ff;
+        --primary-dark: #5e35b1;
+        --accent: #d6c2ff;
+        --background: #faf7ff;
+        --card-bg: #ffffff;
+        --text: #3e1f8f;
+        --text-light: #6b46c1;
+        --text-gray: #8e8ea9;
+        --online: #10b981;
+        --unread: #f59e0b;
+        --like: #ef4444;
+        --story-border: linear-gradient(45deg, #8a4fff, #ff6bff);
+        --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+          0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
+
+      body {
+        background-color: var(--background);
+        color: var(--text);
+        min-height: 100vh;
+      }
+
+      /* ===== AUTH PAGES ===== */
+      .auth-container {
+        display: flex;
+        min-height: 100vh;
+      }
+
+      .auth-left {
+        flex: 1;
+        background: var(--primary);
+        background: linear-gradient(
+          135deg,
+          var(--primary),
+          var(--primary-dark)
+        );
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 2rem;
+        color: white;
+        text-align: center;
+      }
+
+      .auth-left h1 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .auth-left p {
+        font-size: 1.1rem;
+        max-width: 500px;
+        margin-bottom: 2rem;
+      }
+
+      .auth-left img {
+        max-width: 400px;
+        width: 100%;
+        margin-top: 2rem;
+      }
+
+      .auth-right {
+        width: 450px;
+        background-color: var(--card-bg);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 3rem;
+      }
+
+      .auth-logo {
+        font-size: 1.8rem;
+        font-weight: 700;
+        margin-bottom: 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--primary-dark);
+      }
+
+      .auth-logo i {
+        margin-right: 10px;
+        color: var(--primary);
+      }
+
+      .auth-form {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .auth-form h2 {
+        margin-bottom: 1.5rem;
+        text-align: center;
+      }
+
+      .form-group {
+        margin-bottom: 1.5rem;
+        position: relative;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+      }
+
+      .form-group input {
+        width: 100%;
+        padding: 12px 15px;
+        border-radius: 8px;
+        border: 1px solid var(--accent);
+        background-color: var(--background);
+        font-size: 1rem;
+      }
+
+      .form-group input:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 2px var(--primary-lighter);
+      }
+
+      .error-message {
+        color: #ef4444;
+        font-size: 0.8rem;
+        margin-top: 5px;
+        display: none;
+      }
+
+      .auth-btn {
+        background: var(--primary);
+        color: white;
+        border: none;
+        padding: 12px;
+        border-radius: 8px;
+        font-size: 1rem;
+        font-weight: 500;
+        cursor: pointer;
+        margin-top: 0.5rem;
+        transition: all 0.2s ease;
+      }
+
+      .auth-btn:hover {
+        background: var(--primary-dark);
+      }
+
+      .auth-divider {
+        display: flex;
+        align-items: center;
+        margin: 1.5rem 0;
+        color: var(--text-gray);
+      }
+
+      .auth-divider::before,
+      .auth-divider::after {
+        content: "";
+        flex: 1;
+        border-bottom: 1px solid var(--accent);
+      }
+
+      .auth-divider::before {
+        margin-right: 1rem;
+      }
+
+      .auth-divider::after {
+        margin-left: 1rem;
+      }
+
+      .social-login {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .social-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+        border-radius: 8px;
+        border: 1px solid var(--accent);
+        background-color: var(--card-bg);
+        font-size: 1rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .social-btn i {
+        margin-right: 10px;
+        font-size: 1.2rem;
+      }
+
+      .social-btn.google {
+        color: #db4437;
+      }
+
+      .social-btn.facebook {
+        color: #4267b2;
+      }
+
+      .social-btn.twitter {
+        color: #1da1f2;
+      }
+
+      .auth-footer {
+        text-align: center;
+        margin-top: 1.5rem;
+        color: var(--text-gray);
+      }
+
+      .auth-footer a {
+        color: var(--primary);
+        text-decoration: none;
+        font-weight: 500;
+      }
+
+      /* ===== MAIN APP LAYOUT ===== */
+      .app-container {
+        display: none;
+        min-height: 100vh;
+      }
+
+      /* ===== LEFT SIDEBAR ===== */
+      .left-sidebar {
+        width: 280px;
+        background-color: var(--card-bg);
+        border-right: 1px solid var(--accent);
+        height: 100vh;
+        position: sticky;
+        top: 0;
+        padding: 25px 15px;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .logo {
+        font-size: 1.8rem;
+        font-weight: 700;
+        margin-bottom: 30px;
+        display: flex;
+        align-items: center;
+        color: var(--primary-dark);
+        padding: 0 10px;
+      }
+
+      .logo i {
+        margin-right: 10px;
+        color: var(--primary);
+      }
+
+      .nav-menu {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        flex: 1;
+      }
+
+      .nav-item {
+        display: flex;
+        align-items: center;
+        padding: 12px 15px;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        text-decoration: none;
+        color: var(--text);
+      }
+
+      .nav-item:hover,
+      .nav-item.active {
+        background-color: var(--primary-lighter);
+        color: var(--primary-dark);
+      }
+
+      .nav-item i {
+        font-size: 1.4rem;
+        margin-right: 15px;
+        width: 24px;
+        text-align: center;
+      }
+
+      .nav-item span {
+        font-size: 1.1rem;
+        font-weight: 500;
+      }
+
+      .create-post-btn {
+        background: var(--primary);
+        color: white;
+        border: none;
+        padding: 12px;
+        border-radius: 10px;
+        margin: 15px 0;
+        font-size: 1rem;
+        font-weight: 500;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s ease;
+      }
+
+      .create-post-btn:hover {
+        background: var(--primary-dark);
+      }
+
+      .create-post-btn i {
+        margin-right: 8px;
+        font-size: 1.2rem;
+      }
+
+      .profile-card {
+        display: flex;
+        align-items: center;
+        padding: 12px;
+        border-radius: 10px;
+        margin-top: auto;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .profile-card:hover {
+        background-color: var(--primary-lighter);
+      }
+
+      .profile-card img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-right: 12px;
+        border: 2px solid var(--primary);
+      }
+
+      .profile-info h4 {
+        font-size: 0.95rem;
+        margin-bottom: 3px;
+      }
+
+      .profile-info p {
+        font-size: 0.85rem;
+        color: var(--text-gray);
+      }
+
+      /* ===== MAIN CONTENT ===== */
+      .main-content {
+        flex: 1;
+        max-width: 700px;
+        padding: 20px 15px 80px;
+        margin: 0 auto;
+      }
+
+      /* Stories */
+      .stories-container {
+        background: var(--card-bg);
+        border-radius: 15px;
+        padding: 15px;
+        margin-bottom: 20px;
+        border: 1px solid var(--accent);
+        box-shadow: var(--shadow);
+      }
+
+      .stories-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+      }
+
+      .stories-header h3 {
+        font-size: 1.1rem;
+      }
+
+      .stories-header a {
+        color: var(--text-gray);
+        font-size: 0.9rem;
+        text-decoration: none;
+      }
+
+      .stories {
+        display: flex;
+        gap: 15px;
+        padding: 5px 0;
+        overflow-x: auto;
+      }
+
+      .story {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        cursor: pointer;
+        width: 80px;
+        flex-shrink: 0;
+      }
+
+      .story-avatar {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--story-border);
+        padding: 3px;
+        margin-bottom: 5px;
+      }
+
+      .story-avatar img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid var(--card-bg);
+      }
+
+      .story-username {
+        font-size: 0.75rem;
+        text-align: center;
+        width: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      /* Posts */
+      .post {
+        background-color: var(--card-bg);
+        border-radius: 15px;
+        margin-bottom: 25px;
+        border: 1px solid var(--accent);
+        box-shadow: var(--shadow);
+      }
+
+      .post-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 15px;
+      }
+
+      .post-user {
+        display: flex;
+        align-items: center;
+      }
+
+      .post-user img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-right: 12px;
+        border: 2px solid var(--primary);
+      }
+
+      .post-user-info h4 {
+        font-size: 0.95rem;
+        margin-bottom: 3px;
+      }
+
+      .post-user-info p {
+        font-size: 0.8rem;
+        color: var(--text-gray);
+      }
+
+      .post-more {
+        color: var(--text-gray);
+        font-size: 1.2rem;
+        cursor: pointer;
+      }
+
+      .post-image {
+        width: 100%;
+        max-height: 600px;
+        object-fit: cover;
+      }
+
+      .post-actions {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 15px;
+      }
+
+      .post-actions-left {
+        display: flex;
+        gap: 15px;
+      }
+
+      .post-action {
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: var(--text);
+        transition: all 0.2s ease;
+      }
+
+      .post-action.like.active {
+        color: var(--like);
+      }
+
+      .post-action:hover {
+        transform: scale(1.1);
+      }
+
+      .post-stats {
+        padding: 5px 15px;
+      }
+
+      .post-likes {
+        font-size: 0.95rem;
+        font-weight: 600;
+        margin-bottom: 5px;
+      }
+
+      .post-caption {
+        font-size: 0.95rem;
+        margin-bottom: 5px;
+      }
+
+      .post-caption span {
+        font-weight: 600;
+        margin-right: 5px;
+      }
+
+      .post-comments {
+        color: var(--text-gray);
+        font-size: 0.9rem;
+        margin-bottom: 5px;
+        cursor: pointer;
+      }
+
+      .post-time {
+        color: var(--text-gray);
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+      }
+
+      .post-comment-input {
+        display: flex;
+        align-items: center;
+        padding: 10px 15px;
+        border-top: 1px solid var(--accent);
+      }
+
+      .post-comment-input input {
+        flex: 1;
+        border: none;
+        background: transparent;
+        padding: 8px 0;
+        color: var(--text);
+      }
+
+      .post-comment-input input::placeholder {
+        color: var(--text-gray);
+      }
+
+      .post-comment-input button {
+        color: var(--primary);
+        font-weight: 600;
+        background: none;
+        border: none;
+        cursor: pointer;
+      }
+
+      /* Comments Section */
+      .comments-container {
+        max-height: 300px;
+        overflow-y: auto;
+        padding: 0 15px;
+        border-top: 1px solid var(--accent);
+        display: none;
+      }
+
+      .comment {
+        display: flex;
+        margin: 10px 0;
+      }
+
+      .comment-avatar {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-right: 10px;
+        border: 1px solid var(--primary);
+      }
+
+      .comment-content {
+        flex: 1;
+      }
+
+      .comment-user {
+        font-weight: 600;
+        font-size: 0.9rem;
+        margin-right: 5px;
+      }
+
+      .comment-text {
+        font-size: 0.9rem;
+      }
+
+      .comment-actions {
+        display: flex;
+        margin-top: 5px;
+        font-size: 0.8rem;
+        color: var(--text-gray);
+      }
+
+      .comment-action {
+        margin-right: 10px;
+        cursor: pointer;
+      }
+
+      /* ===== RIGHT SIDEBAR ===== */
+      .right-sidebar {
+        width: 350px;
+        background-color: var(--card-bg);
+        border-left: 1px solid var(--accent);
+        height: 100vh;
+        position: sticky;
+        top: 0;
+        padding: 25px 15px;
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* Contacts/Messages */
+      .contacts-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+
+      .contacts-header h3 {
+        font-size: 1.3rem;
+      }
+
+      .contacts-header i {
+        color: var(--primary);
+        font-size: 1.2rem;
+        cursor: pointer;
+      }
+
+      .contacts-search {
+        position: relative;
+        margin-bottom: 20px;
+      }
+
+      .contacts-search input {
+        width: 100%;
+        padding: 10px 15px 10px 40px;
+        border-radius: 20px;
+        border: 1px solid var(--accent);
+        background-color: var(--background);
+        color: var(--text);
+      }
+
+      .contacts-search i {
+        position: absolute;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--text-gray);
+      }
+
+      .contacts-list {
+        flex: 1;
+        overflow-y: auto;
+      }
+
+      .contact {
+        display: flex;
+        padding: 12px 0;
+        align-items: center;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        border-bottom: 1px solid var(--accent);
+      }
+
+      .contact:last-child {
+        border-bottom: none;
+      }
+
+      .contact:hover {
+        background-color: var(--primary-lighter);
+      }
+
+      .contact-avatar {
+        position: relative;
+        margin-right: 12px;
+      }
+
+      .contact-avatar img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid var(--primary);
+      }
+
+      .online-status {
+        position: absolute;
+        bottom: 2px;
+        right: 2px;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background-color: var(--online);
+        border: 2px solid var(--card-bg);
+      }
+
+      .offline .online-status {
+        background-color: var(--text-gray);
+      }
+
+      .contact-info {
+        flex: 1;
+      }
+
+      .contact-info h4 {
+        font-size: 0.95rem;
+        margin-bottom: 3px;
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .contact-info p {
+        font-size: 0.85rem;
+        color: var(--text-gray);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .contact-time {
+        font-size: 0.75rem;
+        color: var(--text-gray);
+      }
+
+      .unread-count {
+        background-color: var(--unread);
+        color: white;
+        font-size: 0.7rem;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: 10px;
+      }
+
+      /* Suggestions */
+      .suggestions-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 25px 0 15px;
+      }
+
+      .suggestions-header h3 {
+        font-size: 1.1rem;
+        color: var(--text-gray);
+      }
+
+      .suggestions-header a {
+        font-size: 0.9rem;
+        color: var(--text);
+        text-decoration: none;
+        font-weight: 500;
+      }
+
+      .suggestion {
+        display: flex;
+        align-items: center;
+        padding: 8px 0;
+        margin-bottom: 5px;
+      }
+
+      .suggestion-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-right: 12px;
+        border: 2px solid var(--primary);
+      }
+
+      .suggestion-info {
+        flex: 1;
+      }
+
+      .suggestion-info h4 {
+        font-size: 0.9rem;
+        margin-bottom: 2px;
+      }
+
+      .suggestion-info p {
+        font-size: 0.8rem;
+        color: var(--text-gray);
+      }
+
+      .follow-btn {
+        color: var(--primary);
+        font-size: 0.8rem;
+        font-weight: 600;
+        background: none;
+        border: none;
+        cursor: pointer;
+      }
+
+      .follow-btn.following {
+        color: var(--text-gray);
+      }
+
+      /* ===== MODALS ===== */
+      .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+      }
+
+      .modal-overlay.active {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .modal {
+        background-color: var(--card-bg);
+        border-radius: 15px;
+        width: 90%;
+        max-width: 500px;
+        max-height: 90vh;
+        overflow-y: auto;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        transform: translateY(20px);
+        transition: all 0.3s ease;
+      }
+
+      .modal-overlay.active .modal {
+        transform: translateY(0);
+      }
+
+      .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 20px;
+        border-bottom: 1px solid var(--accent);
+      }
+
+      .modal-header h3 {
+        font-size: 1.2rem;
+      }
+
+      .modal-close {
+        font-size: 1.5rem;
+        color: var(--text-gray);
+        cursor: pointer;
+        background: none;
+        border: none;
+      }
+
+      .modal-body {
+        padding: 20px;
+      }
+
+      .create-post-tabs {
+        display: flex;
+        border-bottom: 1px solid var(--accent);
+        margin-bottom: 20px;
+      }
+
+      .create-post-tab {
+        flex: 1;
+        text-align: center;
+        padding: 12px;
+        cursor: pointer;
+        font-weight: 500;
+        color: var(--text-gray);
+        border-bottom: 2px solid transparent;
+      }
+
+      .create-post-tab.active {
+        color: var(--primary);
+        border-bottom: 2px solid var(--primary);
+      }
+
+      .post-preview {
+        width: 100%;
+        max-height: 300px;
+        object-fit: contain;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        display: none;
+      }
+
+      .post-preview-container {
+        display: none;
+        position: relative;
+      }
+
+      .post-preview-container.active {
+        display: block;
+      }
+
+      .remove-preview {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: rgba(0, 0, 0, 0.5);
+        color: white;
+        border: none;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+      }
+
+      .caption-input {
+        width: 100%;
+        padding: 12px;
+        border-radius: 8px;
+        border: 1px solid var(--accent);
+        font-size: 1rem;
+        margin-bottom: 15px;
+        resize: none;
+        min-height: 100px;
+      }
+
+      .caption-input:focus {
+        outline: none;
+        border-color: var(--primary);
+      }
+
+      .upload-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        padding: 40px 20px;
+        border: 2px dashed var(--accent);
+        border-radius: 10px;
+        cursor: pointer;
+        margin-bottom: 20px;
+        transition: all 0.2s ease;
+      }
+
+      .upload-btn:hover {
+        border-color: var(--primary);
+      }
+
+      .upload-btn i {
+        font-size: 2.5rem;
+        color: var(--primary);
+        margin-bottom: 15px;
+      }
+
+      .upload-btn p {
+        color: var(--text);
+        font-weight: 500;
+        margin-bottom: 5px;
+      }
+
+      .upload-btn span {
+        color: var(--text-gray);
+        font-size: 0.9rem;
+      }
+
+      .modal-footer {
+        display: flex;
+        justify-content: flex-end;
+        padding: 15px 20px;
+        border-top: 1px solid var(--accent);
+      }
+
+      .modal-btn {
+        padding: 10px 20px;
+        border-radius: 8px;
+        font-weight: 500;
+        cursor: pointer;
+        font-size: 1rem;
+      }
+
+      .modal-btn.cancel {
+        background: none;
+        border: 1px solid var(--accent);
+        color: var(--text);
+        margin-right: 10px;
+      }
+
+      .modal-btn.post {
+        background: var(--primary);
+        color: white;
+        border: none;
+      }
+
+      .modal-btn.post:disabled {
+        background: var(--accent);
+        cursor: not-allowed;
+      }
+
+      /* Chat Modal */
+      .chat-header {
+        display: flex;
+        align-items: center;
+        padding: 15px;
+        border-bottom: 1px solid var(--accent);
+      }
+
+      .chat-header img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-right: 12px;
+        border: 2px solid var(--primary);
+      }
+
+      .chat-header-info h4 {
+        font-size: 1rem;
+      }
+
+      .chat-header-info p {
+        font-size: 0.8rem;
+        color: var(--text-gray);
+      }
+
+      .chat-body {
+        height: 400px;
+        overflow-y: auto;
+        padding: 15px;
+      }
+
+      .message {
+        display: flex;
+        margin-bottom: 15px;
+      }
+
+      .message.received {
+        justify-content: flex-start;
+      }
+
+      .message.sent {
+        justify-content: flex-end;
+      }
+
+      .message-avatar {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-right: 10px;
+      }
+
+      .message.sent .message-avatar {
+        display: none;
+      }
+
+      .message-content {
+        max-width: 70%;
+      }
+
+      .message.received .message-content {
+        background-color: var(--primary-lighter);
+        color: var(--text);
+        border-radius: 0 15px 15px 15px;
+        padding: 10px 15px;
+      }
+
+      .message.sent .message-content {
+        background-color: var(--primary);
+        color: white;
+        border-radius: 15px 0 15px 15px;
+        padding: 10px 15px;
+      }
+
+      .message-time {
+        font-size: 0.7rem;
+        color: var(--text-gray);
+        margin-top: 5px;
+        text-align: right;
+      }
+
+      .chat-input {
+        display: flex;
+        padding: 15px;
+        border-top: 1px solid var(--accent);
+      }
+
+      .chat-input input {
+        flex: 1;
+        padding: 12px 15px;
+        border-radius: 25px;
+        border: 1px solid var(--accent);
+        font-size: 1rem;
+      }
+
+      .chat-input input:focus {
+        outline: none;
+        border-color: var(--primary);
+      }
+
+      .chat-input button {
+        background: var(--primary);
+        color: white;
+        border: none;
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        margin-left: 10px;
+        cursor: pointer;
+        font-size: 1.2rem;
+      }
+
+      /* Profile Modal */
+      .profile-modal .modal {
+        max-width: 600px;
+      }
+
+      .profile-header {
+        display: flex;
+        padding: 20px;
+        border-bottom: 1px solid var(--accent);
+      }
+
+      .profile-avatar {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid var(--primary);
+        margin-right: 25px;
+      }
+
+      .profile-info {
+        flex: 1;
+      }
+
+      .profile-info-top {
+        display: flex;
+        align-items: center;
+        margin-bottom: 15px;
+      }
+
+      .profile-username {
+        font-size: 1.5rem;
+        margin-right: 20px;
+      }
+
+      .profile-btn {
+        padding: 8px 15px;
+        border-radius: 8px;
+        font-weight: 500;
+        cursor: pointer;
+        font-size: 0.9rem;
+        margin-right: 10px;
+      }
+
+      .profile-btn.follow {
+        background: var(--primary);
+        color: white;
+        border: none;
+      }
+
+      .profile-btn.following {
+        background: var(--primary-lighter);
+        color: var(--primary-dark);
+      }
+
+      .profile-btn.message {
+        background: none;
+        border: 1px solid var(--accent);
+        color: var(--text);
+      }
+
+      .profile-btn.settings {
+        background: none;
+        border: none;
+        font-size: 1.2rem;
+        color: var(--text);
+      }
+
+      .profile-stats {
+        display: flex;
+        margin-bottom: 15px;
+      }
+
+      .profile-stat {
+        margin-right: 25px;
+        cursor: pointer;
+      }
+
+      .profile-stat span {
+        font-weight: 600;
+        margin-right: 5px;
+      }
+
+      .profile-bio h4 {
+        font-size: 1rem;
+        margin-bottom: 5px;
+      }
+
+      .profile-bio p {
+        color: var(--text);
+        font-size: 0.9rem;
+      }
+
+      .profile-highlights {
+        display: flex;
+        padding: 15px 20px;
+        border-bottom: 1px solid var(--accent);
+      }
+
+      .profile-highlight {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-right: 25px;
+        cursor: pointer;
+      }
+
+      .profile-highlight-avatar {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid var(--accent);
+        margin-bottom: 5px;
+      }
+
+      .profile-highlight-name {
+        font-size: 0.8rem;
+      }
+
+      .profile-tabs {
+        display: flex;
+        border-bottom: 1px solid var(--accent);
+      }
+
+      .profile-tab {
+        flex: 1;
+        text-align: center;
+        padding: 15px;
+        cursor: pointer;
+        color: var(--text-gray);
+      }
+
+      .profile-tab.active {
+        color: var(--text);
+        border-bottom: 2px solid var(--text);
+      }
+
+      .profile-tab i {
+        font-size: 1.2rem;
+        margin-bottom: 5px;
+      }
+
+      .profile-posts {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2px;
+      }
+
+      .profile-post {
+        aspect-ratio: 1;
+        object-fit: cover;
+        cursor: pointer;
+      }
+
+      /* Story View Modal */
+      .story-modal .modal {
+        max-width: 350px;
+        padding: 0;
+        background: transparent;
+      }
+
+      .story-container {
+        position: relative;
+        height: 600px;
+        border-radius: 15px;
+        overflow: hidden;
+      }
+
+      .story-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .story-header {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        padding: 15px;
+        display: flex;
+        align-items: center;
+        background: linear-gradient(
+          to bottom,
+          rgba(0, 0, 0, 0.5),
+          rgba(0, 0, 0, 0)
+        );
+      }
+
+      .story-user {
+        display: flex;
+        align-items: center;
+        color: white;
+      }
+
+      .story-user img {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-right: 10px;
+        border: 2px solid var(--primary);
+      }
+
+      .story-username {
+        font-weight: 600;
+        font-size: 0.9rem;
+      }
+
+      .story-time {
+        font-size: 0.8rem;
+        margin-left: 10px;
+        color: rgba(255, 255, 255, 0.8);
+      }
+
+      .story-close {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        color: white;
+        font-size: 1.5rem;
+        cursor: pointer;
+      }
+
+      .story-progress {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: rgba(255, 255, 255, 0.3);
+      }
+
+      .story-progress-bar {
+        height: 100%;
+        background: white;
+        width: 0%;
+        transition: width 0.1s linear;
+      }
+
+      .story-footer {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 15px;
+        display: flex;
+        align-items: center;
+        background: linear-gradient(
+          to top,
+          rgba(0, 0, 0, 0.5),
+          rgba(0, 0, 0, 0)
+        );
+      }
+
+      .story-reply {
+        flex: 1;
+        padding: 10px 15px;
+        border-radius: 20px;
+        border: none;
+        margin-right: 10px;
+      }
+
+      .story-reply:focus {
+        outline: none;
+      }
+
+      .story-send {
+        background: var(--primary);
+        color: white;
+        border: none;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+      }
+
+      /* Edit Profile Modal */
+      .edit-profile-form {
+        padding: 20px;
+      }
+
+      .edit-profile-group {
+        margin-bottom: 15px;
+      }
+
+      .edit-profile-group label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: 500;
+      }
+
+      .edit-profile-group input,
+      .edit-profile-group textarea {
+        width: 100%;
+        padding: 10px;
+        border-radius: 8px;
+        border: 1px solid var(--accent);
+        font-size: 1rem;
+      }
+
+      .edit-profile-group textarea {
+        min-height: 100px;
+        resize: vertical;
+      }
+
+      .avatar-upload {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+
+      .avatar-preview {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid var(--primary);
+        margin-bottom: 15px;
+      }
+
+      .avatar-upload-btn {
+        background: var(--primary);
+        color: white;
+        border: none;
+        padding: 8px 15px;
+        border-radius: 8px;
+        cursor: pointer;
+      }
+
+      /* Mobile Navigation */
+      .mobile-nav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: var(--card-bg);
+        display: none;
+        justify-content: space-around;
+        padding: 10px 0;
+        border-top: 1px solid var(--accent);
+        z-index: 100;
+      }
+
+      .mobile-nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-decoration: none;
+        color: var(--text-gray);
+      }
+
+      .mobile-nav-item.active {
+        color: var(--primary);
+      }
+
+      .mobile-nav-item i {
+        font-size: 1.4rem;
+        margin-bottom: 3px;
+      }
+
+      .mobile-nav-item span {
+        font-size: 0.7rem;
+      }
+
+      /* ===== RESPONSIVE DESIGN ===== */
+      @media (max-width: 1200px) {
+        .right-sidebar {
+          position: fixed;
+          right: -350px;
+          top: 0;
+          transition: all 0.3s ease;
+          z-index: 100;
+        }
+
+        .right-sidebar.active {
+          right: 0;
+        }
+      }
+
+      @media (max-width: 992px) {
+        .left-sidebar {
+          position: fixed;
+          left: -280px;
+          top: 0;
+          z-index: 100;
+          transition: all 0.3s ease;
+        }
+
+        .left-sidebar.active {
+          left: 0;
+        }
+
+        .main-content {
+          margin: 0;
+          max-width: 100%;
+          padding-bottom: 70px;
+        }
+
+        .mobile-nav {
+          display: flex;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .left-sidebar {
+          width: 250px;
+        }
+
+        .right-sidebar {
+          width: 100%;
+          right: -100%;
+        }
+
+        .right-sidebar.active {
+          right: 0;
+        }
+
+        .auth-container {
+          flex-direction: column;
+        }
+
+        .auth-left {
+          display: none;
+        }
+
+        .auth-right {
+          width: 100%;
+          padding: 2rem;
+        }
+
+        .story-modal .modal {
+          max-width: 100%;
+          height: 100%;
+          border-radius: 0;
+        }
+
+        .story-container {
+          height: 100vh;
+          border-radius: 0;
+        }
+      }
+
+      @media (max-width: 576px) {
+        .profile-header {
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+        }
+
+        .profile-avatar {
+          margin-right: 0;
+          margin-bottom: 15px;
+        }
+
+        .profile-info-top {
+          justify-content: center;
+        }
+
+        .profile-stats {
+          justify-content: center;
+        }
+
+        .profile-highlights {
+          justify-content: center;
+        }
+
+        .profile-btn {
+          margin-bottom: 10px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Authentication Pages -->
+    <div class="auth-container" id="auth-container">
+      <div class="auth-left">
+        <h1>Welcome to SocialVerse</h1>
+        <p>
+          Connect with friends, share your moments, and explore what's happening
+          around you.
+        </p>
+        <img src="https://i.imgur.com/J3Q6XlK.png" alt="Social Media" />
+      </div>
+      <div class="auth-right">
+        <div class="auth-logo">
+          <i class="fas fa-share-alt"></i>
+          <span>SocialVerse</span>
+        </div>
+
+        <!-- Login Form -->
+        <div class="auth-form" id="login-form">
+          <h2>Log in to your account</h2>
+          <div class="form-group">
+            <label for="login-email">Email</label>
+            <input
+              type="email"
+              id="login-email"
+              placeholder="Enter your email"
+            />
+            <div class="error-message" id="login-email-error"></div>
+          </div>
+          <div class="form-group">
+            <label for="login-password">Password</label>
+            <input
+              type="password"
+              id="login-password"
+              placeholder="Enter your password"
+            />
+            <div class="error-message" id="login-password-error"></div>
+          </div>
+          <button class="auth-btn" id="login-btn">Log In</button>
+          <div class="auth-divider">or</div>
+          <div class="social-login">
+            <button class="social-btn google">
+              <i class="fab fa-google"></i>
+              Continue with Google
+            </button>
+            <button class="social-btn facebook">
+              <i class="fab fa-facebook-f"></i>
+              Continue with Facebook
+            </button>
+            <button class="social-btn twitter">
+              <i class="fab fa-twitter"></i>
+              Continue with Twitter
+            </button>
+          </div>
+          <div class="auth-footer">
+            Don't have an account? <a href="#" id="show-signup">Sign up</a>
+          </div>
+        </div>
+
+        <!-- Signup Form -->
+        <div class="auth-form" id="signup-form" style="display: none">
+          <h2>Create a new account</h2>
+          <div class="form-group">
+            <label for="signup-name">Full Name</label>
+            <input
+              type="text"
+              id="signup-name"
+              placeholder="Enter your full name"
+            />
+            <div class="error-message" id="signup-name-error"></div>
+          </div>
+          <div class="form-group">
+            <label for="signup-email">Email</label>
+            <input
+              type="email"
+              id="signup-email"
+              placeholder="Enter your email"
+            />
+            <div class="error-message" id="signup-email-error"></div>
+          </div>
+          <div class="form-group">
+            <label for="signup-username">Username</label>
+            <input
+              type="text"
+              id="signup-username"
+              placeholder="Choose a username"
+            />
+            <div class="error-message" id="signup-username-error"></div>
+          </div>
+          <div class="form-group">
+            <label for="signup-password">Password</label>
+            <input
+              type="password"
+              id="signup-password"
+              placeholder="Create a password"
+            />
+            <div class="error-message" id="signup-password-error"></div>
+          </div>
+          <div class="form-group">
+            <label for="signup-confirm">Confirm Password</label>
+            <input
+              type="password"
+              id="signup-confirm"
+              placeholder="Confirm your password"
+            />
+            <div class="error-message" id="signup-confirm-error"></div>
+          </div>
+          <button class="auth-btn" id="signup-btn">Sign Up</button>
+          <div class="auth-divider">or</div>
+          <div class="social-login">
+            <button class="social-btn google">
+              <i class="fab fa-google"></i>
+              Continue with Google
+            </button>
+            <button class="social-btn facebook">
+              <i class="fab fa-facebook-f"></i>
+              Continue with Facebook
+            </button>
+            <button class="social-btn twitter">
+              <i class="fab fa-twitter"></i>
+              Continue with Twitter
+            </button>
+          </div>
+          <div class="auth-footer">
+            Already have an account? <a href="#" id="show-login">Log in</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main App Container -->
+    <div class="app-container" id="app-container">
+      <!-- Left Sidebar - Navigation -->
+      <div class="left-sidebar" id="left-sidebar">
+        <div class="logo">
+          <i class="fas fa-share-alt"></i>
+          <span>SocialVerse</span>
+        </div>
+
+        <div class="nav-menu">
+          <a href="#" class="nav-item active" data-page="home">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+          </a>
+          <a href="#" class="nav-item" data-page="search">
+            <i class="fas fa-search"></i>
+            <span>Search</span>
+          </a>
+          <a href="#" class="nav-item" data-page="explore">
+            <i class="fas fa-compass"></i>
+            <span>Explore</span>
+          </a>
+          <a href="#" class="nav-item" data-page="reels">
+            <i class="fas fa-film"></i>
+            <span>Reels</span>
+          </a>
+          <a href="#" class="nav-item" id="messages-nav" data-page="messages">
+            <i class="fas fa-envelope"></i>
+            <span>Messages</span>
+          </a>
+          <a href="#" class="nav-item" data-page="notifications">
+            <i class="fas fa-heart"></i>
+            <span>Notifications</span>
+          </a>
+
+          <button class="create-post-btn" id="create-post-btn">
+            <i class="fas fa-plus"></i>
+            <span>Create</span>
+          </button>
+
+          <a href="#" class="nav-item" id="profile-nav" data-page="profile">
+            <i class="fas fa-user"></i>
+            <span>Profile</span>
+          </a>
+          <a href="#" class="nav-item" data-page="settings">
+            <i class="fas fa-cog"></i>
+            <span>Settings</span>
+          </a>
+        </div>
+
+        <div class="profile-card" id="profile-card">
+          <img id="profile-card-avatar" src="" alt="Profile" />
+          <div class="profile-info">
+            <h4 id="profile-card-name"></h4>
+            <p id="profile-card-username"></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Content - Feed -->
+      <div class="main-content" id="main-content">
+        <!-- Stories -->
+        <div class="stories-container">
+          <div class="stories-header">
+            <h3>Stories</h3>
+            <a href="#">See All</a>
+          </div>
+          <div class="stories" id="stories-list">
+            <!-- Stories will be dynamically added here -->
+          </div>
+        </div>
+
+        <!-- Posts Feed -->
+        <div id="posts-feed">
+          <!-- Posts will be dynamically added here -->
+        </div>
+      </div>
+
+      <!-- Right Sidebar - Contacts/Messages -->
+      <div class="right-sidebar" id="right-sidebar">
+        <div class="contacts-header">
+          <h3>Contacts</h3>
+          <i class="fas fa-video"></i>
+        </div>
+
+        <div class="contacts-search">
+          <i class="fas fa-search"></i>
+          <input
+            type="text"
+            placeholder="Search contacts..."
+            id="contacts-search"
+          />
+        </div>
+
+        <div class="contacts-list" id="contacts-list">
+          <!-- Contacts will be dynamically added here -->
+        </div>
+
+        <div class="suggestions-header">
+          <h3>Suggestions For You</h3>
+          <a href="#">See All</a>
+        </div>
+
+        <div id="suggestions-list">
+          <!-- Suggestions will be dynamically added here -->
+        </div>
+      </div>
+
+      <!-- Mobile Navigation -->
+      <div class="mobile-nav">
+        <a href="#" class="mobile-nav-item active" data-page="home">
+          <i class="fas fa-home"></i>
+          <span>Home</span>
+        </a>
+        <a href="#" class="mobile-nav-item" data-page="search">
+          <i class="fas fa-search"></i>
+          <span>Search</span>
+        </a>
+        <a href="#" class="mobile-nav-item" id="mobile-create-post">
+          <i class="fas fa-plus-square"></i>
+          <span>Create</span>
+        </a>
+        <a
+          href="#"
+          class="mobile-nav-item"
+          id="mobile-messages"
+          data-page="messages"
+        >
+          <i class="fas fa-envelope"></i>
+          <span>Messages</span>
+        </a>
+        <a
+          href="#"
+          class="mobile-nav-item"
+          id="mobile-profile"
+          data-page="profile"
+        >
+          <i class="fas fa-user"></i>
+          <span>Profile</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Modals -->
+    <!-- Create Post Modal -->
+    <div class="modal-overlay" id="create-post-modal">
+      <div class="modal">
+        <div class="modal-header">
+          <h3>Create New Post</h3>
+          <button class="modal-close" id="close-create-post">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="create-post-tabs">
+            <div class="create-post-tab active" data-tab="post">Post</div>
+            <div class="create-post-tab" data-tab="story">Story</div>
+            <div class="create-post-tab" data-tab="reel">Reel</div>
+          </div>
+
+          <div class="post-preview-container" id="post-preview-container">
+            <img src="" class="post-preview active" id="post-preview" />
+            <button class="remove-preview" id="remove-preview">&times;</button>
+          </div>
+
+          <div class="upload-btn" id="upload-btn">
+            <i class="fas fa-cloud-upload-alt"></i>
+            <p>Upload Photo or Video</p>
+            <span>Drag and drop files here or click to browse</span>
+            <input
+              type="file"
+              id="file-input"
+              accept="image/*, video/*"
+              style="display: none"
+            />
+          </div>
+
+          <textarea
+            class="caption-input"
+            placeholder="Write a caption..."
+            id="post-caption"
+          ></textarea>
+        </div>
+        <div class="modal-footer">
+          <button class="modal-btn cancel" id="cancel-post">Cancel</button>
+          <button class="modal-btn post" id="submit-post" disabled>Post</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chat Modal -->
+    <div class="modal-overlay" id="chat-modal">
+      <div class="modal">
+        <div class="modal-header chat-header">
+          <div class="post-user">
+            <img id="chat-user-avatar" src="" alt="User" />
+            <div class="post-user-info">
+              <h4 id="chat-user-name"></h4>
+              <p id="chat-user-status"></p>
+            </div>
+          </div>
+          <button class="modal-close" id="close-chat">&times;</button>
+        </div>
+        <div class="modal-body chat-body" id="chat-body">
+          <!-- Messages will be dynamically added here -->
+        </div>
+        <div class="chat-input">
+          <input type="text" placeholder="Type a message..." id="chat-input" />
+          <button id="send-message">
+            <i class="fas fa-paper-plane"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Profile Modal -->
+    <div class="modal-overlay profile-modal" id="profile-modal">
+      <div class="modal">
+        <div class="modal-header profile-header">
+          <img
+            src=""
+            class="profile-avatar"
+            id="profile-modal-avatar"
+            alt="Profile"
+          />
+          <div class="profile-info">
+            <div class="profile-info-top">
+              <h3 class="profile-username" id="profile-modal-username"></h3>
+              <button class="profile-btn follow" id="profile-follow-btn">
+                Follow
+              </button>
+              <button class="profile-btn message" id="profile-message-btn">
+                Message
+              </button>
+              <button class="profile-btn settings" id="profile-settings-btn">
+                <i class="fas fa-ellipsis-h"></i>
+              </button>
+            </div>
+            <div class="profile-stats">
+              <div class="profile-stat" id="profile-posts-count">
+                <span>0</span> posts
+              </div>
+              <div class="profile-stat" id="profile-followers-count">
+                <span>0</span> followers
+              </div>
+              <div class="profile-stat" id="profile-following-count">
+                <span>0</span> following
+              </div>
+            </div>
+            <div class="profile-bio">
+              <h4 id="profile-full-name"></h4>
+              <p id="profile-bio-text"></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="profile-highlights" id="profile-highlights">
+          <!-- Highlights will be dynamically added here -->
+        </div>
+
+        <div class="profile-tabs">
+          <div class="profile-tab active" data-tab="posts">
+            <i class="fas fa-th"></i>
+            <span>POSTS</span>
+          </div>
+          <div class="profile-tab" data-tab="saved">
+            <i class="fas fa-bookmark"></i>
+            <span>SAVED</span>
+          </div>
+          <div class="profile-tab" data-tab="tagged">
+            <i class="fas fa-user-tag"></i>
+            <span>TAGGED</span>
+          </div>
+        </div>
+
+        <div class="profile-posts" id="profile-posts-grid">
+          <!-- Profile posts will be dynamically added here -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Story View Modal -->
+    <div class="modal-overlay story-modal" id="story-modal">
+      <div class="modal">
+        <div class="story-container">
+          <img src="" class="story-image" id="story-image" />
+          <div class="story-progress">
+            <div class="story-progress-bar" id="story-progress-bar"></div>
+          </div>
+          <div class="story-header">
+            <div class="story-user">
+              <img src="" id="story-user-avatar" />
+              <div class="story-username" id="story-username"></div>
+              <div class="story-time" id="story-time"></div>
+            </div>
+            <div class="story-close" id="story-close">&times;</div>
+          </div>
+          <div class="story-footer">
+            <input
+              type="text"
+              class="story-reply"
+              placeholder="Send message"
+              id="story-reply"
+            />
+            <button class="story-send" id="story-send">
+              <i class="fas fa-paper-plane"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Edit Profile Modal -->
+    <div class="modal-overlay" id="edit-profile-modal">
+      <div class="modal">
+        <div class="modal-header">
+          <h3>Edit Profile</h3>
+          <button class="modal-close" id="close-edit-profile">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="avatar-upload">
+            <img src="" class="avatar-preview" id="edit-avatar-preview" />
+            <button class="avatar-upload-btn" id="change-avatar-btn">
+              Change Profile Photo
+            </button>
+            <input
+              type="file"
+              id="avatar-input"
+              accept="image/*"
+              style="display: none"
+            />
+          </div>
+          <form class="edit-profile-form" id="edit-profile-form">
+            <div class="edit-profile-group">
+              <label for="edit-full-name">Full Name</label>
+              <input
+                type="text"
+                id="edit-full-name"
+                placeholder="Enter your full name"
+              />
+            </div>
+            <div class="edit-profile-group">
+              <label for="edit-username">Username</label>
+              <input
+                type="text"
+                id="edit-username"
+                placeholder="Choose a username"
+              />
+            </div>
+            <div class="edit-profile-group">
+              <label for="edit-website">Website</label>
+              <input
+                type="text"
+                id="edit-website"
+                placeholder="Add a website link"
+              />
+            </div>
+            <div class="edit-profile-group">
+              <label for="edit-bio">Bio</label>
+              <textarea id="edit-bio" placeholder="Tell your story"></textarea>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button class="modal-btn cancel" id="cancel-edit-profile">
+            Cancel
+          </button>
+          <button class="modal-btn post" id="save-profile">Save</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // ===== DATA STORAGE =====
+      // Sample user data
+      const users = [
+        {
+          id: 1,
+          name: "Alexa Morgan",
+          username: "alexamorgan",
+          email: "alexa@example.com",
+          password: "password123",
+          avatar: "https://randomuser.me/api/portraits/women/44.jpg",
+          bio: "Digital creator | Photography enthusiast | Travel lover ✈️ Sharing my journey one post at a time",
+          website: "alexamorgan.com",
+          followers: 12800,
+          following: 1024,
+          isFollowing: false,
+          highlights: [
+            {
+              id: 1,
+              name: "Travel",
+              image:
+                "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&auto=format&fit=crop",
+            },
+            {
+              id: 2,
+              name: "Food",
+              image:
+                "https://images.unsplash.com/photo-1511765224389-37f0e77cf0eb?w=200&auto=format&fit=crop",
+            },
+            {
+              id: 3,
+              name: "Work",
+              image:
+                "https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=200&auto=format&fit=crop",
+            },
+          ],
+          posts: [
+            {
+              id: 1,
+              image:
+                "https://images.unsplash.com/photo-1554080353-a576cf803bda?w=500&auto=format&fit=crop",
+              caption: "Sunset vibes 🌅✨ #sunset #photography #purplehaze",
+              likes: 1243,
+              comments: 84,
+              time: "2 hours ago",
+              liked: false,
+            },
+            {
+              id: 2,
+              image:
+                "https://images.unsplash.com/photo-1541963463532-d68292c34b19?w=500&auto=format&fit=crop",
+              caption:
+                "New design project coming soon! 🚀 #design #uiux #creative",
+              likes: 892,
+              comments: 42,
+              time: "5 hours ago",
+              liked: false,
+            },
+            {
+              id: 3,
+              image:
+                "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&auto=format&fit=crop",
+              caption: "Lavender fields in Provence 💜 #travel #france #nature",
+              likes: 2456,
+              comments: 156,
+              time: "1 day ago",
+              liked: true,
+            },
+          ],
+        },
+        {
+          id: 2,
+          name: "Sarah Johnson",
+          username: "sarah_j",
+          email: "sarah@example.com",
+          password: "password123",
+          avatar: "https://randomuser.me/api/portraits/women/32.jpg",
+          bio: "Photographer | Travel enthusiast | Coffee lover",
+          website: "",
+          followers: 5600,
+          following: 342,
+          isFollowing: true,
+          highlights: [
+            {
+              id: 1,
+              name: "Nature",
+              image:
+                "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=200&auto=format&fit=crop",
+            },
+          ],
+          posts: [
+            {
+              id: 4,
+              image:
+                "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=500&auto=format&fit=crop",
+              caption:
+                "Mountain views are the best views 🏔️ #nature #mountains",
+              likes: 980,
+              comments: 45,
+              time: "3 hours ago",
+              liked: false,
+            },
+          ],
+        },
+        {
+          id: 3,
+          name: "Mike Chen",
+          username: "mike_design",
+          email: "mike@example.com",
+          password: "password123",
+          avatar: "https://randomuser.me/api/portraits/men/45.jpg",
+          bio: "UI/UX Designer | Minimalist | Coffee addict",
+          website: "mikedesigns.com",
+          followers: 8700,
+          following: 523,
+          isFollowing: false,
+          highlights: [],
+          posts: [
+            {
+              id: 5,
+              image:
+                "https://images.unsplash.com/photo-1541963463532-d68292c34b19?w=500&auto=format&fit=crop",
+              caption:
+                "New design project coming soon! 🚀 #design #uiux #creative",
+              likes: 892,
+              comments: 42,
+              time: "5 hours ago",
+              liked: false,
+            },
+          ],
+        },
+        {
+          id: 4,
+          name: "Emma Wilson",
+          username: "emma_travels",
+          email: "emma@example.com",
+          password: "password123",
+          avatar: "https://randomuser.me/api/portraits/women/68.jpg",
+          bio: "Travel blogger | Adventure seeker | Storyteller",
+          website: "emmatravels.com",
+          followers: 15200,
+          following: 876,
+          isFollowing: true,
+          highlights: [
+            {
+              id: 1,
+              name: "Europe",
+              image:
+                "https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=200&auto=format&fit=crop",
+            },
+            {
+              id: 2,
+              name: "Asia",
+              image:
+                "https://images.unsplash.com/photo-1464037866556-6812c9d1c72e?w=200&auto=format&fit=crop",
+            },
+          ],
+          posts: [
+            {
+              id: 6,
+              image:
+                "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&auto=format&fit=crop",
+              caption: "Lavender fields in Provence 💜 #travel #france #nature",
+              likes: 2456,
+              comments: 156,
+              time: "1 day ago",
+              liked: true,
+            },
+          ],
+        },
+        {
+          id: 5,
+          name: "David Miller",
+          username: "david.m",
+          email: "david@example.com",
+          password: "password123",
+          avatar: "https://randomuser.me/api/portraits/men/22.jpg",
+          bio: "Fitness coach | Nutritionist | Motivational speaker",
+          website: "",
+          followers: 3200,
+          following: 245,
+          isFollowing: false,
+          highlights: [],
+          posts: [],
+        },
+        {
+          id: 6,
+          name: "Lisa Park",
+          username: "lisa.park",
+          email: "lisa@example.com",
+          password: "password123",
+          avatar: "https://randomuser.me/api/portraits/women/65.jpg",
+          bio: "Artist | Illustrator | Dreamer",
+          website: "lisapark.art",
+          followers: 7800,
+          following: 432,
+          isFollowing: true,
+          highlights: [
+            {
+              id: 1,
+              name: "Art",
+              image:
+                "https://images.unsplash.com/photo-1541963463532-d68292c34b19?w=200&auto=format&fit=crop",
+            },
+          ],
+          posts: [],
+        },
+      ];
+
+      // Sample stories data
+      const stories = [
+        {
+          id: 1,
+          userId: 1,
+          username: "alexamorgan",
+          avatar: "https://randomuser.me/api/portraits/women/44.jpg",
+          image:
+            "https://images.unsplash.com/photo-1554080353-a576cf803bda?w=500&auto=format&fit=crop",
+          time: "2 hours ago",
+          viewed: false,
+        },
+        {
+          id: 2,
+          userId: 2,
+          username: "sarah_j",
+          avatar: "https://randomuser.me/api/portraits/women/32.jpg",
+          image:
+            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=500&auto=format&fit=crop",
+          time: "1 hour ago",
+          viewed: false,
+        },
+        {
+          id: 3,
+          userId: 3,
+          username: "mike_design",
+          avatar: "https://randomuser.me/api/portraits/men/45.jpg",
+          image:
+            "https://images.unsplash.com/photo-1541963463532-d68292c34b19?w=500&auto=format&fit=crop",
+          time: "4 hours ago",
+          viewed: false,
+        },
+        {
+          id: 4,
+          userId: 4,
+          username: "emma_travels",
+          avatar: "https://randomuser.me/api/portraits/women/68.jpg",
+          image:
+            "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&auto=format&fit=crop",
+          time: "30 minutes ago",
+          viewed: false,
+        },
+        {
+          id: 5,
+          userId: 5,
+          username: "david.m",
+          avatar: "https://randomuser.me/api/portraits/men/22.jpg",
+          image:
+            "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=500&auto=format&fit=crop",
+          time: "6 hours ago",
+          viewed: false,
+        },
+        {
+          id: 6,
+          userId: 6,
+          username: "lisa.park",
+          avatar: "https://randomuser.me/api/portraits/women/65.jpg",
+          image:
+            "https://images.unsplash.com/photo-1541963463532-d68292c34b19?w=500&auto=format&fit=crop",
+          time: "12 hours ago",
+          viewed: false,
+        },
+      ];
+
+      // Sample contacts/messages data
+      const contacts = [
+        {
+          id: 2,
+          name: "Sarah Johnson",
+          username: "sarah_j",
+          avatar: "https://randomuser.me/api/portraits/women/32.jpg",
+          online: true,
+          lastMessage: "Hey! How about meeting this weekend?",
+          time: "12:30 PM",
+          unread: 3,
+        },
+        {
+          id: 3,
+          name: "Mike Chen",
+          username: "mike_design",
+          avatar: "https://randomuser.me/api/portraits/men/45.jpg",
+          online: false,
+          lastMessage: "I've sent you the design files",
+          time: "Yesterday",
+          unread: 0,
+        },
+        {
+          id: 4,
+          name: "Emma Wilson",
+          username: "emma_travels",
+          avatar: "https://randomuser.me/api/portraits/women/68.jpg",
+          online: true,
+          lastMessage: "Thanks for your help with the project!",
+          time: "Yesterday",
+          unread: 1,
+        },
+        {
+          id: 5,
+          name: "David Miller",
+          username: "david.m",
+          avatar: "https://randomuser.me/api/portraits/men/22.jpg",
+          online: false,
+          lastMessage: "Let me know when you're free for a call",
+          time: "Mon",
+          unread: 0,
+        },
+        {
+          id: 6,
+          name: "Lisa Park",
+          username: "lisa.park",
+          avatar: "https://randomuser.me/api/portraits/women/65.jpg",
+          online: true,
+          lastMessage: "Did you see the new update?",
+          time: "Sun",
+          unread: 0,
+        },
+      ];
+
+      // Sample messages data
+      const messages = {
+        2: [
+          {
+            id: 1,
+            sender: 2,
+            text: "Hey! How about meeting this weekend?",
+            time: "12:30 PM",
+          },
+          {
+            id: 2,
+            sender: 1,
+            text: "That sounds great! Saturday works for me.",
+            time: "12:32 PM",
+          },
+          {
+            id: 3,
+            sender: 2,
+            text: "Perfect! Let's meet at the coffee shop at 2pm.",
+            time: "12:33 PM",
+          },
+          {
+            id: 4,
+            sender: 1,
+            text: "I'll be there! Looking forward to it 😊",
+            time: "12:35 PM",
+          },
+        ],
+        4: [
+          {
+            id: 1,
+            sender: 4,
+            text: "Hey, thanks for your help with the project!",
+            time: "10:15 AM",
+          },
+          {
+            id: 2,
+            sender: 1,
+            text: "No problem! Happy to help anytime.",
+            time: "10:20 AM",
+          },
+          {
+            id: 3,
+            sender: 4,
+            text: "Do you have any travel plans for the summer?",
+            time: "10:22 AM",
+          },
+        ],
+      };
+
+      // Sample suggestions data
+      const suggestions = [
+        {
+          id: 7,
+          username: "jessica_ray",
+          name: "Jessica Ray",
+          avatar: "https://randomuser.me/api/portraits/women/33.jpg",
+          mutualFollowers: ["mike_design", "sarah_j", "lisa.park"],
+          isFollowing: false,
+        },
+        {
+          id: 8,
+          username: "alex.turner",
+          name: "Alex Turner",
+          avatar: "https://randomuser.me/api/portraits/men/65.jpg",
+          mutualFollowers: [],
+          isFollowing: false,
+        },
+        {
+          id: 9,
+          username: "taylor_sw",
+          name: "Taylor Swift",
+          avatar: "https://randomuser.me/api/portraits/women/55.jpg",
+          mutualFollowers: ["emma_travels"],
+          isFollowing: false,
+        },
+      ];
+
+      // ===== APP STATE =====
+      let currentUser = null;
+      let loggedIn = false;
+      let currentChatUser = null;
+      let viewedProfile = null;
+      let currentStory = null;
+      let storyInterval = null;
+
+      // ===== DOM ELEMENTS =====
+      // Authentication
+      const authContainer = document.getElementById("auth-container");
+      const appContainer = document.getElementById("app-container");
+      const loginForm = document.getElementById("login-form");
+      const signupForm = document.getElementById("signup-form");
+      const showLogin = document.getElementById("show-login");
+      const showSignup = document.getElementById("show-signup");
+      const loginBtn = document.getElementById("login-btn");
+      const signupBtn = document.getElementById("signup-btn");
+
+      // Login form inputs and errors
+      const loginEmail = document.getElementById("login-email");
+      const loginPassword = document.getElementById("login-password");
+      const loginEmailError = document.getElementById("login-email-error");
+      const loginPasswordError = document.getElementById(
+        "login-password-error"
+      );
+
+      // Signup form inputs and errors
+      const signupName = document.getElementById("signup-name");
+      const signupEmail = document.getElementById("signup-email");
+      const signupUsername = document.getElementById("signup-username");
+      const signupPassword = document.getElementById("signup-password");
+      const signupConfirm = document.getElementById("signup-confirm");
+      const signupNameError = document.getElementById("signup-name-error");
+      const signupEmailError = document.getElementById("signup-email-error");
+      const signupUsernameError = document.getElementById(
+        "signup-username-error"
+      );
+      const signupPasswordError = document.getElementById(
+        "signup-password-error"
+      );
+      const signupConfirmError = document.getElementById(
+        "signup-confirm-error"
+      );
+
+      // Main app
+      const leftSidebar = document.getElementById("left-sidebar");
+      const rightSidebar = document.getElementById("right-sidebar");
+      const mainContent = document.getElementById("main-content");
+      const profileCard = document.getElementById("profile-card");
+      const profileCardAvatar = document.getElementById("profile-card-avatar");
+      const profileCardName = document.getElementById("profile-card-name");
+      const profileCardUsername = document.getElementById(
+        "profile-card-username"
+      );
+
+      // Create post modal
+      const createPostBtn = document.getElementById("create-post-btn");
+      const createPostModal = document.getElementById("create-post-modal");
+      const closeCreatePost = document.getElementById("close-create-post");
+      const cancelPost = document.getElementById("cancel-post");
+      const submitPost = document.getElementById("submit-post");
+      const uploadBtn = document.getElementById("upload-btn");
+      const fileInput = document.getElementById("file-input");
+      const postPreviewContainer = document.getElementById(
+        "post-preview-container"
+      );
+      const postPreview = document.getElementById("post-preview");
+      const removePreview = document.getElementById("remove-preview");
+      const postCaption = document.getElementById("post-caption");
+      const createPostTabs = document.querySelectorAll(".create-post-tab");
+
+      // Chat modal
+      const chatModal = document.getElementById("chat-modal");
+      const closeChat = document.getElementById("close-chat");
+      const messagesNav = document.getElementById("messages-nav");
+      const chatBody = document.getElementById("chat-body");
+      const chatInput = document.getElementById("chat-input");
+      const sendMessage = document.getElementById("send-message");
+      const chatUserAvatar = document.getElementById("chat-user-avatar");
+      const chatUserName = document.getElementById("chat-user-name");
+      const chatUserStatus = document.getElementById("chat-user-status");
+
+      // Profile modal
+      const profileModal = document.getElementById("profile-modal");
+      const profileModalAvatar = document.getElementById(
+        "profile-modal-avatar"
+      );
+      const profileModalUsername = document.getElementById(
+        "profile-modal-username"
+      );
+      const profileFullName = document.getElementById("profile-full-name");
+      const profileBioText = document.getElementById("profile-bio-text");
+      const profileFollowBtn = document.getElementById("profile-follow-btn");
+      const profileMessageBtn = document.getElementById("profile-message-btn");
+      const profileSettingsBtn = document.getElementById(
+        "profile-settings-btn"
+      );
+      const profilePostsCount = document.getElementById("profile-posts-count");
+      const profileFollowersCount = document.getElementById(
+        "profile-followers-count"
+      );
+      const profileFollowingCount = document.getElementById(
+        "profile-following-count"
+      );
+      const profileHighlights = document.getElementById("profile-highlights");
+      const profilePostsGrid = document.getElementById("profile-posts-grid");
+      const profileTabs = document.querySelectorAll(".profile-tab");
+
+      // Story modal
+      const storyModal = document.getElementById("story-modal");
+      const storyImage = document.getElementById("story-image");
+      const storyUserAvatar = document.getElementById("story-user-avatar");
+      const storyUsername = document.getElementById("story-username");
+      const storyTime = document.getElementById("story-time");
+      const storyClose = document.getElementById("story-close");
+      const storyProgressBar = document.getElementById("story-progress-bar");
+      const storyReply = document.getElementById("story-reply");
+      const storySend = document.getElementById("story-send");
+
+      // Edit profile modal
+      const editProfileModal = document.getElementById("edit-profile-modal");
+      const closeEditProfile = document.getElementById("close-edit-profile");
+      const cancelEditProfile = document.getElementById("cancel-edit-profile");
+      const saveProfile = document.getElementById("save-profile");
+      const editProfileForm = document.getElementById("edit-profile-form");
+      const editAvatarPreview = document.getElementById("edit-avatar-preview");
+      const changeAvatarBtn = document.getElementById("change-avatar-btn");
+      const avatarInput = document.getElementById("avatar-input");
+      const editFullName = document.getElementById("edit-full-name");
+      const editUsername = document.getElementById("edit-username");
+      const editWebsite = document.getElementById("edit-website");
+      const editBio = document.getElementById("edit-bio");
+
+      // Mobile navigation
+      const mobileNavItems = document.querySelectorAll(".mobile-nav-item");
+      const mobileCreatePost = document.getElementById("mobile-create-post");
+      const mobileMessages = document.getElementById("mobile-messages");
+      const mobileProfile = document.getElementById("mobile-profile");
+
+      // Content containers
+      const storiesList = document.getElementById("stories-list");
+      const postsFeed = document.getElementById("posts-feed");
+      const contactsList = document.getElementById("contacts-list");
+      const suggestionsList = document.getElementById("suggestions-list");
+
+      // ===== EVENT LISTENERS =====
+      // Authentication
+      showSignup.addEventListener("click", (e) => {
+        e.preventDefault();
+        loginForm.style.display = "none";
+        signupForm.style.display = "flex";
+        clearAuthErrors();
+      });
+
+      showLogin.addEventListener("click", (e) => {
+        e.preventDefault();
+        signupForm.style.display = "none";
+        loginForm.style.display = "flex";
+        clearAuthErrors();
+      });
+
+      loginBtn.addEventListener("click", handleLogin);
+      loginEmail.addEventListener("keypress", (e) => {
+        if (e.key === "Enter") handleLogin();
+      });
+      loginPassword.addEventListener("keypress", (e) => {
+        if (e.key === "Enter") handleLogin();
+      });
+
+      signupBtn.addEventListener("click", handleSignup);
+      signupName.addEventListener("keypress", (e) => {
+        if (e.key === "Enter") handleSignup();
+      });
+      signupEmail.addEventListener("keypress", (e) => {
+        if (e.key === "Enter") handleSignup();
+      });
+      signupUsername.addEventListener("keypress", (e) => {
+        if (e.key === "Enter") handleSignup();
+      });
+      signupPassword.addEventListener("keypress", (e) => {
+        if (e.key === "Enter") handleSignup();
+      });
+      signupConfirm.addEventListener("keypress", (e) => {
+        if (e.key === "Enter") handleSignup();
+      });
+
+      // Create post modal
+      createPostBtn.addEventListener("click", openCreatePostModal);
+      mobileCreatePost.addEventListener("click", openCreatePostModal);
+      closeCreatePost.addEventListener("click", closeCreatePostModal);
+      cancelPost.addEventListener("click", closeCreatePostModal);
+      uploadBtn.addEventListener("click", () => fileInput.click());
+      fileInput.addEventListener("change", handleFileUpload);
+      removePreview.addEventListener("click", removePostPreview);
+      postCaption.addEventListener("input", validatePostForm);
+      submitPost.addEventListener("click", createPost);
+      createPostTabs.forEach((tab) => {
+        tab.addEventListener("click", () => switchCreatePostTab(tab));
+      });
+
+      // Chat functionality
+      messagesNav.addEventListener("click", (e) => {
+        e.preventDefault();
+        openChatModal();
+      });
+      mobileMessages.addEventListener("click", (e) => {
+        e.preventDefault();
+        openChatModal();
+      });
+      closeChat.addEventListener("click", closeChatModal);
+      chatInput.addEventListener("keypress", (e) => {
+        if (e.key === "Enter") sendChatMessage();
+      });
+      sendMessage.addEventListener("click", sendChatMessage);
+
+      // Profile functionality
+      profileNav.addEventListener("click", (e) => {
+        e.preventDefault();
+        openProfileModal(currentUser.id);
+      });
+      mobileProfile.addEventListener("click", (e) => {
+        e.preventDefault();
+        openProfileModal(currentUser.id);
+      });
+      profileCard.addEventListener("click", (e) => {
+        e.preventDefault();
+        openProfileModal(currentUser.id);
+      });
+      profileFollowBtn.addEventListener("click", toggleFollow);
+      profileMessageBtn.addEventListener("click", () => {
+        closeProfileModal();
+        openChatModal(viewedProfile.id);
+      });
+      profileSettingsBtn.addEventListener("click", openEditProfileModal);
+      profileTabs.forEach((tab) => {
+        tab.addEventListener("click", () => switchProfileTab(tab));
+      });
+
+      // Story functionality
+      storyClose.addEventListener("click", closeStoryModal);
+      storySend.addEventListener("click", sendStoryReply);
+      storyReply.addEventListener("keypress", (e) => {
+        if (e.key === "Enter") sendStoryReply();
+      });
+
+      // Edit profile modal
+      closeEditProfile.addEventListener("click", closeEditProfileModal);
+      cancelEditProfile.addEventListener("click", closeEditProfileModal);
+      changeAvatarBtn.addEventListener("click", () => avatarInput.click());
+      avatarInput.addEventListener("change", handleAvatarUpload);
+      saveProfile.addEventListener("click", saveProfileChanges);
+
+      // Mobile navigation
+      mobileNavItems.forEach((item) => {
+        item.addEventListener("click", (e) => {
+          e.preventDefault();
+          const page = item.getAttribute("data-page");
+          navigateToPage(page);
+        });
+      });
+
+      // Left sidebar navigation
+      document.querySelectorAll(".nav-item").forEach((item) => {
+        item.addEventListener("click", (e) => {
+          e.preventDefault();
+          const page = item.getAttribute("data-page");
+          navigateToPage(page);
+        });
+      });
+
+      // Right sidebar toggle
+      document
+        .getElementById("contacts-search")
+        .addEventListener("focus", () => {
+          if (window.innerWidth < 1200) {
+            rightSidebar.classList.add("active");
+          }
+        });
+
+      // Initialize the app
+      document.addEventListener("DOMContentLoaded", initApp);
+
+      // ===== FUNCTIONS =====
+      function initApp() {
+        // Check if user is logged in from localStorage
+        const storedUser = localStorage.getItem("socialVerseUser");
+        if (storedUser) {
+          currentUser = JSON.parse(storedUser);
+          loggedIn = true;
+          authContainer.style.display = "none";
+          appContainer.style.display = "flex";
+          loadAppData();
+        }
+
+        // Load sample data if no current user (for demo purposes)
+        if (!currentUser) {
+          currentUser = users[0]; // Default to first user for demo
+        }
+
+        // Initialize UI
+        updateProfileCard();
+        renderStories();
+        renderPosts();
+        renderContacts();
+        renderSuggestions();
+      }
+
+      function loadAppData() {
+        // In a real app, this would load data from a server
+        updateProfileCard();
+        renderStories();
+        renderPosts();
+        renderContacts();
+        renderSuggestions();
+      }
+
+      // Authentication functions
+      function handleLogin(e) {
+        if (e) e.preventDefault();
+
+        const email = loginEmail.value.trim();
+        const password = loginPassword.value.trim();
+        let valid = true;
+
+        // Validate email
+        if (!email) {
+          loginEmailError.textContent = "Email is required";
+          loginEmailError.style.display = "block";
+          valid = false;
+        } else if (!isValidEmail(email)) {
+          loginEmailError.textContent = "Please enter a valid email";
+          loginEmailError.style.display = "block";
+          valid = false;
+        } else {
+          loginEmailError.style.display = "none";
+        }
+
+        // Validate password
+        if (!password) {
+          loginPasswordError.textContent = "Password is required";
+          loginPasswordError.style.display = "block";
+          valid = false;
+        } else if (password.length < 6) {
+          loginPasswordError.textContent =
+            "Password must be at least 6 characters";
+          loginPasswordError.style.display = "block";
+          valid = false;
+        } else {
+          loginPasswordError.style.display = "none";
+        }
+
+        if (!valid) return;
+
+        // Check credentials (in a real app, this would be a server request)
+        const user = users.find(
+          (u) => u.email === email && u.password === password
+        );
+
+        if (user) {
+          // Login successful
+          currentUser = user;
+          loggedIn = true;
+
+          // Store user in localStorage
+          localStorage.setItem("socialVerseUser", JSON.stringify(user));
+
+          // Switch to app view
+          authContainer.style.display = "none";
+          appContainer.style.display = "flex";
+
+          // Load app data
+          loadAppData();
+        } else {
+          // Login failed
+          loginPasswordError.textContent = "Invalid email or password";
+          loginPasswordError.style.display = "block";
+        }
+      }
+
+      function handleSignup(e) {
+        if (e) e.preventDefault();
+
+        const name = signupName.value.trim();
+        const email = signupEmail.value.trim();
+        const username = signupUsername.value.trim();
+        const password = signupPassword.value.trim();
+        const confirm = signupConfirm.value.trim();
+        let valid = true;
+
+        // Validate name
+        if (!name) {
+          signupNameError.textContent = "Name is required";
+          signupNameError.style.display = "block";
+          valid = false;
+        } else {
+          signupNameError.style.display = "none";
+        }
+
+        // Validate email
+        if (!email) {
+          signupEmailError.textContent = "Email is required";
+          signupEmailError.style.display = "block";
+          valid = false;
+        } else if (!isValidEmail(email)) {
+          signupEmailError.textContent = "Please enter a valid email";
+          signupEmailError.style.display = "block";
+          valid = false;
+        } else if (users.some((u) => u.email === email)) {
+          signupEmailError.textContent = "Email already in use";
+          signupEmailError.style.display = "block";
+          valid = false;
+        } else {
+          signupEmailError.style.display = "none";
+        }
+
+        // Validate username
+        if (!username) {
+          signupUsernameError.textContent = "Username is required";
+          signupUsernameError.style.display = "block";
+          valid = false;
+        } else if (users.some((u) => u.username === username)) {
+          signupUsernameError.textContent = "Username already taken";
+          signupUsernameError.style.display = "block";
+          valid = false;
+        } else {
+          signupUsernameError.style.display = "none";
+        }
+
+        // Validate password
+        if (!password) {
+          signupPasswordError.textContent = "Password is required";
+          signupPasswordError.style.display = "block";
+          valid = false;
+        } else if (password.length < 6) {
+          signupPasswordError.textContent =
+            "Password must be at least 6 characters";
+          signupPasswordError.style.display = "block";
+          valid = false;
+        } else {
+          signupPasswordError.style.display = "none";
+        }
+
+        // Validate confirm password
+        if (!confirm) {
+          signupConfirmError.textContent = "Please confirm your password";
+          signupConfirmError.style.display = "block";
+          valid = false;
+        } else if (password !== confirm) {
+          signupConfirmError.textContent = "Passwords don't match";
+          signupConfirmError.style.display = "block";
+          valid = false;
+        } else {
+          signupConfirmError.style.display = "none";
+        }
+
+        if (!valid) return;
+
+        // Create new user (in a real app, this would be a server request)
+        const newUser = {
+          id: users.length + 1,
+          name,
+          username,
+          email,
+          password,
+          avatar: "https://randomuser.me/api/portraits/women/44.jpg",
+          bio: "",
+          website: "",
+          followers: 0,
+          following: 0,
+          isFollowing: false,
+          highlights: [],
+          posts: [],
+        };
+
+        users.push(newUser);
+        currentUser = newUser;
+        loggedIn = true;
+
+        // Store user in localStorage
+        localStorage.setItem("socialVerseUser", JSON.stringify(newUser));
+
+        // Switch to app view
+        authContainer.style.display = "none";
+        appContainer.style.display = "flex";
+
+        // Load app data
+        loadAppData();
+      }
+
+      function clearAuthErrors() {
+        // Clear all error messages
+        const errorMessages = document.querySelectorAll(".error-message");
+        errorMessages.forEach((el) => (el.style.display = "none"));
+      }
+
+      function isValidEmail(email) {
+        // Simple email validation
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      }
+
+      // Profile card functions
+      function updateProfileCard() {
+        if (!currentUser) return;
+
+        profileCardAvatar.src = currentUser.avatar;
+        profileCardName.textContent = currentUser.name;
+        profileCardUsername.textContent = `@${currentUser.username}`;
+      }
+
+      // Stories functions
+      function renderStories() {
+        if (!storiesList) return;
+
+        storiesList.innerHTML = "";
+
+        // Add "Your Story" first
+        const yourStory = document.createElement("div");
+        yourStory.className = "story";
+        yourStory.innerHTML = `
+          <div class="story-avatar">
+            <img src="${currentUser.avatar}" alt="Your Story" />
+          </div>
+          <div class="story-username">Your Story</div>
+        `;
+        yourStory.addEventListener("click", createStory);
+        storiesList.appendChild(yourStory);
+
+        // Add other stories
+        stories.forEach((story) => {
+          const storyEl = document.createElement("div");
+          storyEl.className = "story";
+          storyEl.innerHTML = `
+            <div class="story-avatar">
+              <img src="${story.avatar}" alt="${story.username}" />
+            </div>
+            <div class="story-username">${story.username}</div>
+          `;
+          storyEl.addEventListener("click", () => viewStory(story.id));
+          storiesList.appendChild(storyEl);
+        });
+      }
+
+      function createStory() {
+        alert("Open camera to create new story");
+        // In a real app, this would open the camera or file picker
+      }
+
+      function viewStory(storyId) {
+        const story = stories.find((s) => s.id === storyId);
+        if (!story) return;
+
+        currentStory = story;
+
+        // Update story modal
+        storyImage.src = story.image;
+        storyUserAvatar.src = story.avatar;
+        storyUsername.textContent = story.username;
+        storyTime.textContent = story.time;
+
+        // Mark as viewed
+        story.viewed = true;
+
+        // Open modal
+        storyModal.classList.add("active");
+
+        // Start story progress
+        startStoryProgress();
+      }
+
+      function startStoryProgress() {
+        let progress = 0;
+        storyProgressBar.style.width = "0%";
+
+        // Clear any existing interval
+        if (storyInterval) clearInterval(storyInterval);
+
+        // Start new interval
+        storyInterval = setInterval(() => {
+          progress += 1;
+          storyProgressBar.style.width = `${progress}%`;
+
+          if (progress >= 100) {
+            clearInterval(storyInterval);
+            closeStoryModal();
+          }
+        }, 100);
+      }
+
+      function closeStoryModal() {
+        if (storyInterval) clearInterval(storyInterval);
+        storyModal.classList.remove("active");
+      }
+
+      function sendStoryReply() {
+        const message = storyReply.value.trim();
+        if (message) {
+          alert(`Reply to ${currentStory.username}: ${message}`);
+          storyReply.value = "";
+        }
+      }
+
+      // Posts functions
+      function renderPosts() {
+        if (!postsFeed) return;
+
+        // Combine all posts from current user and users they follow
+        const allPosts = [];
+
+        // Add current user's posts
+        allPosts.push(...currentUser.posts);
+
+        // Add posts from users that current user follows
+        users.forEach((user) => {
+          if (user.isFollowing) {
+            allPosts.push(...user.posts);
+          }
+        });
+
+        // Sort posts by time (in a real app, this would be by timestamp)
+        allPosts.sort((a, b) => {
+          // Simple sorting for demo (newer posts first)
+          return b.id - a.id;
+        });
+
+        // Clear existing posts
+        postsFeed.innerHTML = "";
+
+        // Render each post
+        allPosts.forEach((post) => {
+          const user = users.find((u) => u.posts.some((p) => p.id === post.id));
+          if (!user) return;
+
+          const postEl = document.createElement("div");
+          postEl.className = "post";
+          postEl.dataset.postId = post.id;
+          postEl.innerHTML = `
+            <div class="post-header">
+              <div class="post-user">
+                <img src="${user.avatar}" alt="${user.username}" />
+                <div class="post-user-info">
+                  <h4>${user.username}</h4>
+                  <p>${user.name}</p>
+                </div>
+              </div>
+              <i class="fas fa-ellipsis-h post-more"></i>
+            </div>
+            <img src="${post.image}" class="post-image" alt="Post" />
+            <div class="post-actions">
+              <div class="post-actions-left">
+                <i class="far fa-heart post-action like ${
+                  post.liked ? "active fas" : ""
+                }"></i>
+                <i class="far fa-comment post-action"></i>
+                <i class="far fa-paper-plane post-action"></i>
+              </div>
+              <i class="far fa-bookmark post-action"></i>
+            </div>
+            <div class="post-stats">
+              <div class="post-likes">${formatNumber(post.likes)} likes</div>
+              <div class="post-caption">
+                <span>${user.username}</span>
+                ${post.caption}
+              </div>
+              <div class="post-comments">View all ${
+                post.comments
+              } comments</div>
+              <div class="post-time">${post.time}</div>
+            </div>
+            <div class="post-comment-input">
+              <input type="text" placeholder="Add a comment..." />
+              <button>Post</button>
+            </div>
+            <div class="comments-container"></div>
+          `;
+
+          postsFeed.appendChild(postEl);
+
+          // Add event listeners for the new post
+          const likeBtn = postEl.querySelector(".post-action.like");
+          const commentBtn = postEl.querySelector(".post-action.comment");
+          const commentInput = postEl.querySelector(
+            ".post-comment-input input"
+          );
+          const commentSubmit = postEl.querySelector(
+            ".post-comment-input button"
+          );
+          const viewComments = postEl.querySelector(".post-comments");
+          const commentsContainer = postEl.querySelector(".comments-container");
+
+          likeBtn.addEventListener("click", () => toggleLike(post.id));
+
+          viewComments.addEventListener("click", () => {
+            commentsContainer.style.display =
+              commentsContainer.style.display === "block" ? "none" : "block";
+            // In a real app, this would load comments from a server
+          });
+
+          commentSubmit.addEventListener("click", () => {
+            const commentText = commentInput.value.trim();
+            if (commentText) {
+              addComment(post.id, commentText);
+              commentInput.value = "";
+            }
+          });
+
+          commentInput.addEventListener("keypress", (e) => {
+            if (e.key === "Enter") {
+              const commentText = commentInput.value.trim();
+              if (commentText) {
+                addComment(post.id, commentText);
+                commentInput.value = "";
+              }
+            }
+          });
+        });
+      }
+
+      function toggleLike(postId) {
+        // Find the post in any user's posts
+        let post = null;
+        let user = null;
+
+        for (const u of users) {
+          post = u.posts.find((p) => p.id === postId);
+          if (post) {
+            user = u;
+            break;
+          }
+        }
+
+        if (!post) return;
+
+        // Toggle like status
+        post.liked = !post.liked;
+
+        // Update like count
+        if (post.liked) {
+          post.likes += 1;
+        } else {
+          post.likes -= 1;
+        }
+
+        // Update UI
+        const postEl = document.querySelector(
+          `.post[data-post-id="${postId}"]`
+        );
+        if (postEl) {
+          const likeBtn = postEl.querySelector(".post-action.like");
+          const likesCount = postEl.querySelector(".post-likes");
+
+          likeBtn.classList.toggle("active");
+          likeBtn.classList.toggle("far");
+          likeBtn.classList.toggle("fas");
+
+          likesCount.textContent = `${formatNumber(post.likes)} likes`;
+        }
+      }
+
+      function addComment(postId, text) {
+        // In a real app, this would send the comment to a server
+        const postEl = document.querySelector(
+          `.post[data-post-id="${postId}"]`
+        );
+        if (!postEl) return;
+
+        const commentsContainer = postEl.querySelector(".comments-container");
+        const commentsCount = postEl.querySelector(".post-comments");
+
+        // Create new comment
+        const commentEl = document.createElement("div");
+        commentEl.className = "comment";
+        commentEl.innerHTML = `
+          <img src="${currentUser.avatar}" class="comment-avatar" />
+          <div class="comment-content">
+            <span class="comment-user">${currentUser.username}</span>
+            <span class="comment-text">${text}</span>
+            <div class="comment-actions">
+              <span class="comment-action">Like</span>
+              <span class="comment-action">Reply</span>
+              <span class="comment-action">1m</span>
+            </div>
+          </div>
+        `;
+
+        // Add to comments container
+        if (commentsContainer.children.length === 0) {
+          commentsContainer.style.display = "block";
+        }
+        commentsContainer.appendChild(commentEl);
+
+        // Update comments count
+        const currentCount = parseInt(
+          commentsCount.textContent.match(/\d+/)[0]
+        );
+        commentsCount.textContent = `View all ${currentCount + 1} comments`;
+      }
+
+      // Create post functions
+      function openCreatePostModal() {
+        createPostModal.classList.add("active");
+      }
+
+      function closeCreatePostModal() {
+        createPostModal.classList.remove("active");
+        resetCreatePostForm();
+      }
+
+      function resetCreatePostForm() {
+        postPreviewContainer.style.display = "none";
+        postPreview.src = "";
+        uploadBtn.style.display = "flex";
+        postCaption.value = "";
+        submitPost.disabled = true;
+        fileInput.value = "";
+      }
+
+      function handleFileUpload(e) {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        // Check if file is an image
+        if (!file.type.match("image.*")) {
+          alert("Please select an image file");
+          return;
+        }
+
+        // Create preview
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          postPreview.src = event.target.result;
+          postPreviewContainer.style.display = "block";
+          uploadBtn.style.display = "none";
+          validatePostForm();
+        };
+        reader.readAsDataURL(file);
+      }
+
+      function removePostPreview() {
+        postPreview.src = "";
+        postPreviewContainer.style.display = "none";
+        uploadBtn.style.display = "flex";
+        fileInput.value = "";
+        validatePostForm();
+      }
+
+      function validatePostForm() {
+        submitPost.disabled = !(postPreview.src && postCaption.value.trim());
+      }
+
+      function createPost() {
+        const caption = postCaption.value.trim();
+        if (!postPreview.src || !caption) return;
+
+        // In a real app, this would upload to a server
+        const newPost = {
+          id: Date.now(), // Use timestamp as ID for demo
+          image: postPreview.src,
+          caption,
+          likes: 0,
+          comments: 0,
+          time: "Just now",
+          liked: false,
+        };
+
+        // Add to current user's posts
+        currentUser.posts.unshift(newPost);
+
+        // Update UI
+        renderPosts();
+
+        // Close modal and reset form
+        closeCreatePostModal();
+      }
+
+      function switchCreatePostTab(tab) {
+        // Remove active class from all tabs
+        createPostTabs.forEach((t) => t.classList.remove("active"));
+
+        // Add active class to clicked tab
+        tab.classList.add("active");
+
+        // In a real app, this would switch between post types
+        alert(`Switched to ${tab.textContent} tab`);
+      }
+
+      // Contacts/Messages functions
+      function renderContacts() {
+        if (!contactsList) return;
+
+        contactsList.innerHTML = "";
+
+        contacts.forEach((contact) => {
+          const contactEl = document.createElement("div");
+          contactEl.className = `contact ${contact.online ? "" : "offline"}`;
+          contactEl.dataset.userId = contact.id;
+          contactEl.innerHTML = `
+            <div class="contact-avatar">
+              <img src="${contact.avatar}" alt="${contact.name}" />
+              <div class="online-status"></div>
+            </div>
+            <div class="contact-info">
+              <h4>
+                ${contact.name}
+                <span class="contact-time">${contact.time}</span>
+              </h4>
+              <p>${contact.lastMessage}</p>
+            </div>
+            ${
+              contact.unread > 0
+                ? `<div class="unread-count">${contact.unread}</div>`
+                : ""
+            }
+          `;
+
+          contactEl.addEventListener("click", () => openChatModal(contact.id));
+          contactsList.appendChild(contactEl);
+        });
+      }
+
+      function openChatModal(userId) {
+        // If no userId provided, open with first contact
+        const contactId = userId || contacts[0].id;
+        const contact = contacts.find((c) => c.id === contactId);
+        if (!contact) return;
+
+        currentChatUser = contact;
+
+        // Update chat header
+        chatUserAvatar.src = contact.avatar;
+        chatUserName.textContent = contact.name;
+        chatUserStatus.textContent = contact.online ? "Active now" : "Offline";
+
+        // Clear existing messages
+        chatBody.innerHTML = "";
+
+        // Load messages for this user
+        const userMessages = messages[contact.id] || [];
+
+        // Render messages
+        userMessages.forEach((msg) => {
+          const isCurrentUser = msg.sender === currentUser.id;
+          const messageEl = document.createElement("div");
+          messageEl.className = `message ${
+            isCurrentUser ? "sent" : "received"
+          }`;
+
+          if (!isCurrentUser) {
+            messageEl.innerHTML = `
+              <img src="${contact.avatar}" class="message-avatar" alt="${contact.name}" />
+              <div class="message-content">
+                ${msg.text}
+                <div class="message-time">${msg.time}</div>
+              </div>
+            `;
+          } else {
+            messageEl.innerHTML = `
+              <div class="message-content">
+                ${msg.text}
+                <div class="message-time">${msg.time}</div>
+              </div>
+            `;
+          }
+
+          chatBody.appendChild(messageEl);
+        });
+
+        // Scroll to bottom
+        chatBody.scrollTop = chatBody.scrollHeight;
+
+        // Open modal
+        chatModal.classList.add("active");
+
+        // Clear unread count
+        contact.unread = 0;
+        renderContacts();
+      }
+
+      function closeChatModal() {
+        chatModal.classList.remove("active");
+        currentChatUser = null;
+      }
+
+      function sendChatMessage() {
+        const messageText = chatInput.value.trim();
+        if (!messageText || !currentChatUser) return;
+
+        // Create new message
+        const newMessage = {
+          id: Date.now(),
+          sender: currentUser.id,
+          text: messageText,
+          time: new Date().toLocaleTimeString([], {
+            hour: "2-digit",
+            minute: "2-digit",
+          }),
+        };
+
+        // Add to messages (in a real app, this would send to a server)
+        if (!messages[currentChatUser.id]) {
+          messages[currentChatUser.id] = [];
+        }
+        messages[currentChatUser.id].push(newMessage);
+
+        // Add to UI
+        const messageEl = document.createElement("div");
+        messageEl.className = "message sent";
+        messageEl.innerHTML = `
+          <div class="message-content">
+            ${messageText}
+            <div class="message-time">${newMessage.time}</div>
+          </div>
+        `;
+        chatBody.appendChild(messageEl);
+
+        // Clear input and scroll to bottom
+        chatInput.value = "";
+        chatBody.scrollTop = chatBody.scrollHeight;
+
+        // In a real app, you would wait for server response before showing message
+      }
+
+      // Profile modal functions
+      function openProfileModal(userId) {
+        viewedProfile = users.find((u) => u.id === userId);
+        if (!viewedProfile) return;
+
+        // Update profile info
+        profileModalAvatar.src = viewedProfile.avatar;
+        profileModalUsername.textContent = viewedProfile.username;
+        profileFullName.textContent = viewedProfile.name;
+        profileBioText.textContent = viewedProfile.bio || "No bio yet";
+
+        // Update stats
+        profilePostsCount.innerHTML = `<span>${viewedProfile.posts.length}</span> posts`;
+        profileFollowersCount.innerHTML = `<span>${formatNumber(
+          viewedProfile.followers
+        )}</span> followers`;
+        profileFollowingCount.innerHTML = `<span>${formatNumber(
+          viewedProfile.following
+        )}</span> following`;
+
+        // Update follow button
+        if (viewedProfile.id === currentUser.id) {
+          profileFollowBtn.style.display = "none";
+          profileMessageBtn.style.display = "none";
+          profileSettingsBtn.style.display = "block";
+        } else {
+          profileFollowBtn.style.display = "block";
+          profileMessageBtn.style.display = "block";
+          profileSettingsBtn.style.display = "block";
+
+          if (viewedProfile.isFollowing) {
+            profileFollowBtn.textContent = "Following";
+            profileFollowBtn.classList.add("following");
+          } else {
+            profileFollowBtn.textContent = "Follow";
+            profileFollowBtn.classList.remove("following");
+          }
+        }
+
+        // Render highlights
+        renderProfileHighlights();
+
+        // Render posts
+        renderProfilePosts();
+
+        // Open modal
+        profileModal.classList.add("active");
+      }
+
+      function closeProfileModal() {
+        profileModal.classList.remove("active");
+        viewedProfile = null;
+      }
+
+      function renderProfileHighlights() {
+        if (!viewedProfile) return;
+
+        profileHighlights.innerHTML = "";
+
+        if (viewedProfile.highlights.length === 0) {
+          profileHighlights.style.display = "none";
+          return;
+        }
+
+        profileHighlights.style.display = "flex";
+
+        viewedProfile.highlights.forEach((highlight) => {
+          const highlightEl = document.createElement("div");
+          highlightEl.className = "profile-highlight";
+          highlightEl.innerHTML = `
+            <img src="${highlight.image}" class="profile-highlight-avatar" />
+            <span class="profile-highlight-name">${highlight.name}</span>
+          `;
+          profileHighlights.appendChild(highlightEl);
+        });
+      }
+
+      function renderProfilePosts() {
+        if (!viewedProfile) return;
+
+        profilePostsGrid.innerHTML = "";
+
+        if (viewedProfile.posts.length === 0) {
+          const emptyMessage = document.createElement("div");
+          emptyMessage.style.textAlign = "center";
+          emptyMessage.style.padding = "20px";
+          emptyMessage.textContent = "No posts yet";
+          profilePostsGrid.appendChild(emptyMessage);
+          return;
+        }
+
+        viewedProfile.posts.forEach((post) => {
+          const postEl = document.createElement("img");
+          postEl.className = "profile-post";
+          postEl.src = post.image;
+          postEl.addEventListener("click", () => {
+            // In a real app, this would show the full post
+            alert(`Viewing post by ${viewedProfile.username}`);
+          });
+          profilePostsGrid.appendChild(postEl);
+        });
+      }
+
+      function toggleFollow() {
+        if (!viewedProfile || viewedProfile.id === currentUser.id) return;
+
+        viewedProfile.isFollowing = !viewedProfile.isFollowing;
+
+        if (viewedProfile.isFollowing) {
+          viewedProfile.followers += 1;
+          currentUser.following += 1;
+          profileFollowBtn.textContent = "Following";
+          profileFollowBtn.classList.add("following");
+        } else {
+          viewedProfile.followers -= 1;
+          currentUser.following -= 1;
+          profileFollowBtn.textContent = "Follow";
+          profileFollowBtn.classList.remove("following");
+        }
+
+        // Update counts
+        profileFollowersCount.innerHTML = `<span>${formatNumber(
+          viewedProfile.followers
+        )}</span> followers`;
+
+        // Update current user's following count in their profile
+        if (viewedProfile.id === currentUser.id) {
+          const followingCount = document.getElementById(
+            "profile-following-count"
+          );
+          if (followingCount) {
+            followingCount.innerHTML = `<span>${formatNumber(
+              currentUser.following
+            )}</span> following`;
+          }
+        }
+      }
+
+      function switchProfileTab(tab) {
+        // Remove active class from all tabs
+        profileTabs.forEach((t) => t.classList.remove("active"));
+
+        // Add active class to clicked tab
+        tab.classList.add("active");
+
+        // In a real app, this would load different content
+        const tabType = tab.getAttribute("data-tab");
+        alert(`Switched to ${tabType} tab`);
+      }
+
+      // Suggestions functions
+      function renderSuggestions() {
+        if (!suggestionsList) return;
+
+        suggestionsList.innerHTML = "";
+
+        suggestions.forEach((user) => {
+          const suggestionEl = document.createElement("div");
+          suggestionEl.className = "suggestion";
+          suggestionEl.dataset.userId = user.id;
+          suggestionEl.innerHTML = `
+            <img src="${user.avatar}" class="suggestion-avatar" alt="${
+            user.name
+          }" />
+            <div class="suggestion-info">
+              <h4>${user.username}</h4>
+              <p>${
+                user.mutualFollowers.length > 0
+                  ? `Followed by ${user.mutualFollowers[0]}${
+                      user.mutualFollowers.length > 1
+                        ? ` + ${user.mutualFollowers.length - 1} more`
+                        : ""
+                    }`
+                  : "New to SocialVerse"
+              }</p>
+            </div>
+            <button class="follow-btn ${user.isFollowing ? "following" : ""}">
+              ${user.isFollowing ? "Following" : "Follow"}
+            </button>
+          `;
+
+          const followBtn = suggestionEl.querySelector(".follow-btn");
+          followBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            toggleSuggestionFollow(user.id);
+          });
+
+          suggestionEl.addEventListener("click", () => {
+            openProfileModal(user.id);
+          });
+
+          suggestionsList.appendChild(suggestionEl);
+        });
+      }
+
+      function toggleSuggestionFollow(userId) {
+        const user = suggestions.find((u) => u.id === userId);
+        if (!user) return;
+
+        user.isFollowing = !user.isFollowing;
+
+        // Update button text
+        const suggestionEl = document.querySelector(
+          `.suggestion[data-user-id="${userId}"]`
+        );
+        if (suggestionEl) {
+          const followBtn = suggestionEl.querySelector(".follow-btn");
+          followBtn.textContent = user.isFollowing ? "Following" : "Follow";
+          followBtn.classList.toggle("following");
+        }
+      }
+
+      // Edit profile functions
+      function openEditProfileModal() {
+        if (!currentUser) return;
+
+        // Fill form with current user data
+        editAvatarPreview.src = currentUser.avatar;
+        editFullName.value = currentUser.name;
+        editUsername.value = currentUser.username;
+        editWebsite.value = currentUser.website || "";
+        editBio.value = currentUser.bio || "";
+
+        // Open modal
+        editProfileModal.classList.add("active");
+      }
+
+      function closeEditProfileModal() {
+        editProfileModal.classList.remove("active");
+      }
+
+      function handleAvatarUpload(e) {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        // Check if file is an image
+        if (!file.type.match("image.*")) {
+          alert("Please select an image file");
+          return;
+        }
+
+        // Create preview
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          editAvatarPreview.src = event.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+
+      function saveProfileChanges() {
+        if (!currentUser) return;
+
+        // Get form values
+        const name = editFullName.value.trim();
+        const username = editUsername.value.trim();
+        const website = editWebsite.value.trim();
+        const bio = editBio.value.trim();
+
+        // Validate
+        if (!name || !username) {
+          alert("Name and username are required");
+          return;
+        }
+
+        // Check if username is taken by another user
+        const usernameTaken = users.some(
+          (u) => u.username === username && u.id !== currentUser.id
+        );
+
+        if (usernameTaken) {
+          alert("Username already taken");
+          return;
+        }
+
+        // Update current user
+        currentUser.name = name;
+        currentUser.username = username;
+        currentUser.website = website;
+        currentUser.bio = bio;
+
+        // Update avatar if changed
+        if (editAvatarPreview.src !== currentUser.avatar) {
+          currentUser.avatar = editAvatarPreview.src;
+        }
+
+        // Update UI
+        updateProfileCard();
+        renderPosts(); // In case username changed
+
+        // Close modal
+        closeEditProfileModal();
+
+        // If viewing own profile, refresh it
+        if (viewedProfile && viewedProfile.id === currentUser.id) {
+          openProfileModal(currentUser.id);
+        }
+      }
+
+      // Navigation functions
+      function navigateToPage(page) {
+        // Update active nav items
+        document.querySelectorAll(".nav-item").forEach((item) => {
+          item.classList.toggle(
+            "active",
+            item.getAttribute("data-page") === page
+          );
+        });
+
+        document.querySelectorAll(".mobile-nav-item").forEach((item) => {
+          item.classList.toggle(
+            "active",
+            item.getAttribute("data-page") === page
+          );
+        });
+
+        // In a real app, this would load the appropriate page content
+        mainContent.innerHTML = `<h2 style="text-align: center; margin-top: 50px;">${
+          page.charAt(0).toUpperCase() + page.slice(1)
+        } Page</h2>`;
+
+        // For demo, show different content for some pages
+        switch (page) {
+          case "home":
+            renderPosts();
+            break;
+          case "profile":
+            openProfileModal(currentUser.id);
+            break;
+          case "messages":
+            openChatModal();
+            break;
+        }
+
+        // Close sidebars on mobile
+        if (window.innerWidth < 992) {
+          leftSidebar.classList.remove("active");
+        }
+        if (window.innerWidth < 1200) {
+          rightSidebar.classList.remove("active");
+        }
+      }
+
+      // Utility functions
+      function formatNumber(num) {
+        if (num >= 1000000) {
+          return (num / 1000000).toFixed(1) + "m";
+        } else if (num >= 1000) {
+          return (num / 1000).toFixed(1) + "k";
+        }
+        return num.toString();
+      }
+    </script>
+  </body>
+</html>
